@@ -1,0 +1,26 @@
+- hosts: conf3
+
+  tasks:
+  - name : Update all packages
+    yum: name=* state=latest update_cache=true
+
+  - name : Install the latest tree package
+    yum: name=tree state=latest update_cache=true
+
+  - name : Set MTU in file
+    shell: echo MTU=\"8888\" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+
+  - name: Set MTU in Runtime
+    shell: ip link set mtu 8888 dev eth0
+
+  - name : Install cloud agent
+    shell: cd /usr/local && wget https://telescope-ru-moscow-1.obs.ru-moscow-1.hc.sbercloud.ru/scripts/agentInstall.sh && chmod 755 agentInstall.sh && ./agentInstall.sh
+
+  - name : Create and mount /dev/vdb1 partition
+    script: /root/ansible/datadisk.sh
+
+  - name : Update Kernel parameters
+    script: /roor/ansible/kernel.sh
+
+  - name : Reboot hosts
+    reboot:
