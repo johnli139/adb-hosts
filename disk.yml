@@ -1,0 +1,20 @@
+- name: Set Master parameters
+
+  hosts: conf22-master
+  tasks:
+  - name: Init and mount Data disks
+    script: datadisk-1.sh
+
+  - name: Reboot hosts
+    reboot:
+
+- name: Set Segments parameters
+
+  hosts: conf22-segments
+  tasks:
+  - name: Init and mount Data disks
+    script: datadisk-2.sh
+
+  - name: Reboot hosts
+    reboot:
+

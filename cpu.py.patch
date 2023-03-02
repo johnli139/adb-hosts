@@ -1,0 +1,19 @@
+--- /usr/share/diamond/collectors/cpu/cpu.py	2023-02-02 15:34:37.649723296 +0300
++++ /usr/share/diamond/collectors/cpu/cpu.py	2023-02-02 15:35:15.009360645 +0300
+@@ -92,11 +92,11 @@
+         if os.access(self.PROC, os.R_OK):
+ 
+             # If simple only return aggregate CPU% metric
+-            if str_to_bool(self.config['simple']):
+-                dt = cpu_delta_time(self.INTERVAL)
+-                cpuPct = 100 - (dt[len(dt) - 1] * 100.00 / sum(dt))
+-                self.publish('percent', str('%.4f' % cpuPct))
+-                return True
++            #if str_to_bool(self.config['simple']):
++            dt = cpu_delta_time(self.INTERVAL)
++            cpuPct = 100 - (dt[len(dt) - 1] * 100.00 / sum(dt))
++            self.publish('percent', str('%.4f' % cpuPct))
++            #    return True
+ 
+             results = {}
+             # Open file

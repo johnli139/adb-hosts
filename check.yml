@@ -1,0 +1,60 @@
+- name: Check parameters
+  hosts: conf22
+
+  tasks:
+  - name: Check Disks
+    shell: lsblk
+    register: result_lsblk
+
+  - name: Print Disks
+    debug: 
+      var: result_lsblk.stdout_lines
+
+  - name: Check fstab
+    shell: cat /etc/fstab
+    register: result_fstab
+    
+  - name: Print fstab
+    debug:
+      var: result_fstab.stdout_lines
+
+  - name: Check MTU in file
+    shell: cat /etc/sysconfig/network-scripts/ifcfg-eth0
+    register: result_MTU_file
+  
+  - name: Print MTU in file
+    debug: 
+      var: result_MTU_file.stdout_lines
+
+  - name: Check MTU in Runtime
+    shell: ip link | grep mtu
+    register: result_MTU_runtime
+
+  - name: Print MTU in runtime
+    debug: 
+      var: result_MTU_runtime.stdout_lines
+
+  - name: Check SberCloud monitoring agent status
+    shell: systemctl status telescoped
+    ignore_errors: true
+    register: result_status
+
+  - name: Print Service state
+    debug: 
+      var: result_status.stdout_lines
+
+  - name: Set Kernel parameters
+    shell: sysctl -a | egrep  'core.rmem|core.wmem'
+    register: result_kernel
+
+  - name: Print Kernel
+    debug: 
+      var: result_kernel.stdout_lines
+
+  - name: Uptime
+    shell: uptime
+    register: result_uptime
+
+  - name: Print Uptime
+    debug: 
+      var: result_uptime.stdout_lines
