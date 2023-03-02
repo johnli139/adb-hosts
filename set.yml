@@ -20,18 +20,5 @@
   - name: Set Kernel parameters
     script: kernel.sh
   
-#  - name: Set 5s metrics interval in Diamond
-#    shell: sed -i 's/interval = 60/interval = 5/' /etc/diamond/diamond.conf && systemctl restart diamond
-
-#  - name: Get all the CPU metrics from hosts
-#    shell: sed -i 's/simple = True/simple = False/' /etc/diamond/collectors/CPUCollector.conf && systemctl restart diamond
-    
-#  - name: Patch Diamond
-#    copy: 
-#      src: cpu.py.patch
-#      dest: /tmp/cpu.py.patch
-#    shell: patch -d/ -p0 </tmp/cpu.py.patch && systemctl restart diamond
-  
   - name: Reboot hosts
     reboot:
-
