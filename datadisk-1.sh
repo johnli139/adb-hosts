@@ -1,6 +1,14 @@
 #!/bin/bash
-(echo g; echo n; echo ""; echo ""; echo ""; echo w) | fdisk /dev/vdb
-mkfs.xfs /dev/vdb1
+parted --script /dev/vdb \
+    mklabel gpt \
+    unit s \
+    mkpart data1 2048s 100%
+mkfs -t xfs /dev/vdb1
 mkdir /data1
-echo UUID=$(lsblk -o +uuid | grep vdb1 | awk '{print $7}') /data1 xfs defaults 0 2 >> /etc/fstab
+mount /dev/vdb1 /data1
+echo UUID=$(lsblk --fs | grep vdb1 | awk -F" " '{ print $3}') /data1 xfs defaults 0 2 >> /etc/fstab
 
+umount /dev/vdb1
+
+mount -a
+mount | grep data

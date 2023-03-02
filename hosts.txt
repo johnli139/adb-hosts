@@ -1,0 +1,89 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+## green.example.com
+## blue.example.com
+## 192.168.100.1
+## 192.168.100.10
+
+# Ex 2: A collection of hosts belonging to the 'webservers' group
+
+## [webservers]
+## alpha.example.org
+## beta.example.org
+## 192.168.1.100
+## 192.168.1.110
+
+# If you have multiple hosts following a pattern you can specify
+# them like this:
+
+## www[001:006].example.com
+
+# Ex 3: A collection of database servers in the 'dbservers' group
+
+## [dbservers]
+## 
+## db01.intranet.mydomain.net
+## db02.intranet.mydomain.net
+## 10.25.1.56
+## 10.25.1.57
+
+# Here's another example of host ranges, this time there are no
+# leading 0s:
+
+## db-[99:101]-node.example.com
+
+[conf1]
+mki-1-master-1
+mki-1-segment-1
+mki-1-segment-2
+mki-1-segment-3
+mki-1-segment-4
+mki-1-segment-5
+mki-1-segment-6
+mki-1-segment-7
+mki-1-segment-8
+
+[conf2]
+mki-2-master-1
+mki-2-segment-1
+mki-2-segment-2
+mki-2-segment-3
+mki-2-segment-4
+mki-2-adcc
+
+[conf22:children]
+conf22-master
+conf22-segments
+	
+[conf22-master]
+mki-22-master-1
+
+[conf22-segments]
+mki-22-segment-1
+mki-22-segment-2
+mki-22-segment-3
+mki-22-segment-4
+
+[conf24]
+mki-24-master-1
+mki-24-segment-1
+mki-24-segment-2
+mki-24-segment-3
+mki-24-segment-4
+
+[conf3]
+mki-3-master-1
+mki-3-segment-1
+mki-3-segment-2
+mki-3-segment-3
+mki-3-segment-4
