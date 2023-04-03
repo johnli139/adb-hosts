@@ -1,6 +1,6 @@
 - name: Set monitoring
 
-  hosts: conf22
+  hosts: "{{ hosts }}"
   tasks:
   - name: Set 5s metrics interval in Diamond
     shell: sed -i 's/interval = 60/interval = 5/' /etc/diamond/diamond.conf

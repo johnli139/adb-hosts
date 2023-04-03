@@ -1,6 +1,6 @@
 - name: Set parameters
 
-  hosts: conf22
+  hosts: "{{ hosts }}"
   tasks:
   - name: Update all packages
     yum: name=* state=latest update_cache=true

@@ -1,5 +1,5 @@
 - name: Check parameters
-  hosts: conf22
+  hosts: "{{ hosts }}"
 
   tasks:
   - name: Check Disks
